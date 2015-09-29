@@ -1,7 +1,9 @@
-﻿namespace Pricing.Services
+﻿using Pricing.Domain;
+
+namespace Pricing.Services
 {
     public interface IEmailingService
     {
-        void SendEmailToTheSalesTeam();
+        void SendEmailToTheSalesTeam(PricingQuery pricingQuery);
     }
 }

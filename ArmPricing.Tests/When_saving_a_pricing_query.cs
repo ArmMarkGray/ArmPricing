@@ -72,7 +72,7 @@ namespace ArmPricing.Tests
         [Test]
         public void Should_MakeACallToTheEmailService_When_RegisteringAPricingQuery()
         {
-            _emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam());
+            _emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam(new PricingQuery()));
         }
 
         [Test]
@@ -125,6 +125,12 @@ namespace ArmPricing.Tests
         public void Should_CallThePricingQueryRepositoryWithAPricingQueryWithTheValueSet_When_AttemptingToRegisterAPricingQuery()
         {
             _pricingQueryRepositoryMock.AssertWasCalled(x => x.RegisterPricingQuery(Arg<PricingQuery>.Matches(p=>p.Value() == 100.0m)));
+        }
+
+        [Test]
+        public void Should_CallTheEmailingServiceWithAPricingQueryWithTheValueSet_When_AttemptingToRegisterAPricingQuery()
+        {
+            _emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam(Arg<PricingQuery>.Matches(p=>p.Value() == 100.0m)));
         }
     }
 }

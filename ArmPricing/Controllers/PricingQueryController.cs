@@ -23,9 +23,9 @@ namespace Pricing.Controllers
         [HttpPost]
         public ActionResult Register(CustomerPricingQueryModel customerPricingQueryModel)
         {
-            _customerMapper.GenerateQuery(customerPricingQueryModel);
-            _pricingQueryRepository.RegisterPricingQuery(new PricingQuery());
-            _emailingServiceMock.SendEmailToTheSalesTeam();
+            var pricingQuery = _customerMapper.GenerateQuery(customerPricingQueryModel);
+            _pricingQueryRepository.RegisterPricingQuery(pricingQuery);
+            _emailingServiceMock.SendEmailToTheSalesTeam(pricingQuery);
             return View("ThankYou");
         }
     }
