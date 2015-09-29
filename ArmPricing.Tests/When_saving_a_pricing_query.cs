@@ -11,11 +11,13 @@ namespace ArmPricing.Tests
     {
         private PricingQueryController controllerUnderTest;
         private IPricingQueryService pricingQueryServiceMock;
+        private IEmailingService emailingServiceMock;
 
         [SetUp]
         public void SetUpTests()
         {
             pricingQueryServiceMock = MockRepository.GenerateMock<IPricingQueryService>();
+            emailingServiceMock = MockRepository.GenerateMock<IEmailingService>();
             controllerUnderTest = new PricingQueryController(pricingQueryServiceMock);
         }
 
@@ -24,6 +26,13 @@ namespace ArmPricing.Tests
         {
             controllerUnderTest.Register();
             pricingQueryServiceMock.AssertWasCalled(x => x.RegisterPricingQuery());
+        }
+
+        [Test]
+        public void Should_MakeACallToTheEmailService_When_RegisteringAPricingQuery()
+        {
+            controllerUnderTest.Register();
+            emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam());
         }
 
     }

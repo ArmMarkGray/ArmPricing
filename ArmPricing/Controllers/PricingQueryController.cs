@@ -12,6 +12,9 @@ namespace Pricing.Controllers
             _pricingQueryService = pricingQueryService;
         }
 
+
+
+        [HttpPost]
         public ActionResult Register()
         {
             _pricingQueryService.RegisterPricingQuery();
