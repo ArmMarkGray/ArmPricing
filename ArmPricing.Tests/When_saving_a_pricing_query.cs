@@ -72,7 +72,7 @@ namespace ArmPricing.Tests
         [Test]
         public void Should_MakeACallToTheEmailService_When_RegisteringAPricingQuery()
         {
-            _emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam(new PricingQuery()));
+            _emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam(Arg<PricingQuery>.Is.Anything));
         }
 
         [Test]
