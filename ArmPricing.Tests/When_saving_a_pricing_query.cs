@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Mvc;
 using NUnit.Framework;
 using Pricing.Controllers;
 using Pricing.Services;
@@ -35,5 +36,12 @@ namespace ArmPricing.Tests
             _emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam());
         }
 
+        [Test]
+        public void Should_SendTheCustomerToTheThankYouPage_When_ThePricingQueryHasBeenRegistered()
+        {
+            var result = _controllerUnderTest.Register() as ViewResult;
+
+            Assert.That(result.ViewName, Is.EqualTo("ThankYou"));
+        }
     }
 }
