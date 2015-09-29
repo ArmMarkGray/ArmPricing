@@ -9,13 +9,13 @@ namespace Pricing.Controllers
     public class PricingQueryController : Controller
     {
         private readonly IPricingQueryRepository _pricingQueryRepository;
-        private readonly IEmailingService _emailingServiceMock;
+        private readonly IEmailingService _emailingService;
         private readonly ICustomerPricingQueryEngine _customerMapper;
 
-        public PricingQueryController(IPricingQueryRepository pricingQueryRepository, IEmailingService emailingServiceMock, ICustomerPricingQueryEngine customerMapper)
+        public PricingQueryController(IPricingQueryRepository pricingQueryRepository, IEmailingService emailingService, ICustomerPricingQueryEngine customerMapper)
         {
             _pricingQueryRepository = pricingQueryRepository;
-            _emailingServiceMock = emailingServiceMock;
+            _emailingService = emailingService;
             _customerMapper = customerMapper;
         }
 
@@ -30,7 +30,7 @@ namespace Pricing.Controllers
         {
             var pricingQuery = _customerMapper.GenerateQuery(customerPricingQueryModel);
             _pricingQueryRepository.RegisterPricingQuery(pricingQuery);
-            _emailingServiceMock.SendEmailToTheSalesTeam(pricingQuery);
+            _emailingService.SendEmailToTheSalesTeam(pricingQuery);
             return View("ThankYou");
         }
     }

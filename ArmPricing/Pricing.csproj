@@ -115,6 +115,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mappers\ICustomerPricingQueryEngine.cs" />
+    <Compile Include="Models\CustomerPricingQueryInputModel.cs" />
     <Compile Include="Models\CustomerPricingQueryModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,6 +147,9 @@
       <Project>{249D2356-304B-49A9-B29B-9146E31F05F5}</Project>
       <Name>Pricing.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\PricingQuery\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

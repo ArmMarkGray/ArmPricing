@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_loading_the_pricing_query_index_page.cs" />
     <Compile Include="When_saving_a_pricing_query.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
