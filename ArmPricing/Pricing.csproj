@@ -119,7 +119,7 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IEmailingService.cs" />
-    <Compile Include="Services\IPricingQueryService.cs" />
+    <Compile Include="Services\IPricingQueryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

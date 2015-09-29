@@ -16,7 +16,7 @@ namespace ArmPricing.Tests
     public class When_saving_a_pricing_query
     {
         private PricingQueryController _controllerUnderTest;
-        private IPricingQueryService _pricingQueryServiceMock;
+        private IPricingQueryRepository _pricingQueryRepositoryMock;
         private IEmailingService _emailingServiceMock;
         private ICustomerPricingQueryEngine _customerPricingQueryEngineMock;
         private ViewResult _result;
@@ -24,11 +24,11 @@ namespace ArmPricing.Tests
         [SetUp]
         public void SetUpTests()
         {
-            _pricingQueryServiceMock = MockRepository.GenerateMock<IPricingQueryService>();
+            _pricingQueryRepositoryMock = MockRepository.GenerateMock<IPricingQueryRepository>();
             _emailingServiceMock = MockRepository.GenerateMock<IEmailingService>();
             _customerPricingQueryEngineMock = MockRepository.GenerateMock<ICustomerPricingQueryEngine>();
 
-            _controllerUnderTest = new PricingQueryController(_pricingQueryServiceMock, _emailingServiceMock, _customerPricingQueryEngineMock);
+            _controllerUnderTest = new PricingQueryController(_pricingQueryRepositoryMock, _emailingServiceMock, _customerPricingQueryEngineMock);
 
             var customerPricingModel = SetUpCustomerPricingQueryModel();
 
@@ -54,9 +54,9 @@ namespace ArmPricing.Tests
         }
 
         [Test]
-        public void Should_MakeACallToThePricingQueryService_When_AttemptingToRegisterAPricingQuery()
+        public void Should_MakeACallToThePricingQueryRepository_When_AttemptingToRegisterAPricingQuery()
         {
-            _pricingQueryServiceMock.AssertWasCalled(x => x.RegisterPricingQuery(Arg<PricingQuery>.Is.Anything));
+            _pricingQueryRepositoryMock.AssertWasCalled(x => x.RegisterPricingQuery(Arg<PricingQuery>.Is.Anything));
         }
 
         [Test]
@@ -106,9 +106,9 @@ namespace ArmPricing.Tests
         }
 
         [Test]
-        public void Should_CallThePricingQueryServiceWithAPricingQuery_When_AttemptingToRegisterAPricingQuery()
+        public void Should_CallThePricingQueryRepositoryWithAPricingQuery_When_AttemptingToRegisterAPricingQuery()
         {
-            _pricingQueryServiceMock.AssertWasCalled(x=>x.RegisterPricingQuery(Arg<PricingQuery>.Is.Anything));
+            _pricingQueryRepositoryMock.AssertWasCalled(x=>x.RegisterPricingQuery(Arg<PricingQuery>.Is.Anything));
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Pricing.Services
 {
-    public interface IPricingQueryService
+    public interface IPricingQueryRepository
     {
         void RegisterPricingQuery(PricingQuery pricingQuery);
     }
