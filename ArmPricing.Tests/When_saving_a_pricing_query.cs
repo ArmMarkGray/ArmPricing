@@ -15,7 +15,7 @@ namespace ArmPricing.Tests
         private PricingQueryController _controllerUnderTest;
         private IPricingQueryService _pricingQueryServiceMock;
         private IEmailingService _emailingServiceMock;
-        private IMapCustomerPricingModels _customerMapper;
+        private IMapCustomerPricingModels _customerMapperMock;
         private ViewResult _result;
 
         [SetUp]
@@ -23,8 +23,13 @@ namespace ArmPricing.Tests
         {
             _pricingQueryServiceMock = MockRepository.GenerateMock<IPricingQueryService>();
             _emailingServiceMock = MockRepository.GenerateMock<IEmailingService>();
-            _controllerUnderTest = new PricingQueryController(_pricingQueryServiceMock, _emailingServiceMock);
-            _result = _controllerUnderTest.Register() as ViewResult;
+            _customerMapperMock = MockRepository.GenerateMock<IMapCustomerPricingModels>();
+            
+            _controllerUnderTest = new PricingQueryController(_pricingQueryServiceMock, _emailingServiceMock, _customerMapperMock);
+
+            var customerPricingModel = new CustomerPricingModel();
+            
+            _result = _controllerUnderTest.Register(customerPricingModel) as ViewResult;
         }
 
         [Test]
@@ -48,7 +53,7 @@ namespace ArmPricing.Tests
         [Test]
         public void Should_MapACustomerPricingQueryModelWithCustomerLastName_When_AttemptingToRegisterAPricingQuery()
         {
-            _customerMapper.AssertWasCalled(x=>x.Map(Arg<CustomerPricingModel>.Is.Anything));
+            _customerMapperMock.AssertWasCalled(x=>x.Map(Arg<CustomerPricingModel>.Is.Anything));
         }
     }
 }
