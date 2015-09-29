@@ -5,10 +5,11 @@
 ASP.net MVC most likely with Razor as it is the most common tempting framework for asp.net
 Asking for optional and mandatory fields so you expect validation, possibly implies a JS framework?
 Entities would include:
-*Customer
-*ContactDetails
-*Product
-*PricingQuery, i.e., the sum query of all product prices
+
+* Customer
+* ContactDetails
+* Product
+* PricingQuery, i.e., the sum query of all product prices
 
 This entities would be saved to a DB most likely MSSQL as we are using Asp.net MVC but could easily be a document db or some other NoSql Db.
 
