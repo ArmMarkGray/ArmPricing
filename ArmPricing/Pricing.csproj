@@ -152,7 +152,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\PricingQuery\Index.cshtml" />
+    <Content Include="Views\PricingQuery\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

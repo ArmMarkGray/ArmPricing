@@ -11,6 +11,11 @@ namespace Pricing.Controllers
         private readonly IEmailingService _emailingService;
         private readonly ICustomerPricingQueryEngine _customerMapper;
 
+        public PricingQueryController()
+        {
+            
+        }
+
         public PricingQueryController(IPricingQueryRepository pricingQueryRepository, IEmailingService emailingService, ICustomerPricingQueryEngine customerMapper)
         {
             _pricingQueryRepository = pricingQueryRepository;
