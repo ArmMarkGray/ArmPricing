@@ -27,7 +27,10 @@ namespace ArmPricing.Tests
             
             _controllerUnderTest = new PricingQueryController(_pricingQueryServiceMock, _emailingServiceMock, _customerMapperMock);
 
-            var customerPricingModel = new CustomerPricingModel();
+            var customerPricingModel = new CustomerPricingModel
+            {
+                LastName = "Jones"
+            };
             
             _result = _controllerUnderTest.Register(customerPricingModel) as ViewResult;
         }
