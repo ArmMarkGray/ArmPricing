@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using NUnit.Framework;
 using Pricing.Controllers;
+using Pricing.Mappers;
+using Pricing.Models;
 using Pricing.Services;
 using Rhino.Mocks;
 
@@ -13,6 +15,7 @@ namespace ArmPricing.Tests
         private PricingQueryController _controllerUnderTest;
         private IPricingQueryService _pricingQueryServiceMock;
         private IEmailingService _emailingServiceMock;
+        private IMapCustomerPricingModels _customerMapper;
 
         [SetUp]
         public void SetUpTests()
@@ -42,6 +45,14 @@ namespace ArmPricing.Tests
             var result = _controllerUnderTest.Register() as ViewResult;
 
             Assert.That(result.ViewName, Is.EqualTo("ThankYou"));
+        }
+
+        [Test]
+        public void Should_MapACustomerPricingQueryModelWithCustomerLastName_When_AttemptingToRegisterAPricingQuery()
+        {
+            _controllerUnderTest.Register();
+
+            _customerMapper.AssertWasCalled(x=>x.Map(Arg<CustomerPricingModel>.Is.Anything));
         }
     }
 }
