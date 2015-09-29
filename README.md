@@ -1,5 +1,29 @@
 # ArmPricing
 
+**The Exercise**
+
+For this exercise could you implement an MVC.NET Pricing query form in C#.     
+
+The form should contain the following fields:
+- First Name - Optional
+- Last Name - Mandatory
+- Email - Mandatory
+- Address -Line 1, City, postcode and  Country mandatory
+- Phone - Mandatory
+- Products -  User should be able to select multiple products, selection of at least one product is mandatory
+
+After form submission the following actions should happen:
+
+1. Pricing query is registered to the database – they will also be retrieved for future reports.
+2. Email sales team about the query.
+
+A few pointers:
+
+-  You should expect to spend no more than two or three hours on this challenge.
+-  The code should be of 'production quality'. We will be looking for evidence that it's written to be flexible and maintainable.
+-  Be sure to state (or comment) your assumptions.
+-  This should be used as an opportunity to showcase your development approach.   
+
 **Assumptions**
 
 ASP.net MVC most likely with Razor as it is the most common tempting framework for asp.net
