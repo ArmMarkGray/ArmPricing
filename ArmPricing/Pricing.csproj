@@ -114,7 +114,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\IMapCustomerPricingModels.cs" />
+    <Compile Include="Mappers\ICustomerPricingQueryEngine.cs" />
     <Compile Include="Models\CustomerPricingQueryModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

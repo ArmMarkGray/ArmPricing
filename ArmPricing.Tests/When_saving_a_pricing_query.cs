@@ -17,7 +17,7 @@ namespace ArmPricing.Tests
         private PricingQueryController _controllerUnderTest;
         private IPricingQueryService _pricingQueryServiceMock;
         private IEmailingService _emailingServiceMock;
-        private IMapCustomerPricingModels _customerPricingQueryMapperMock;
+        private ICustomerPricingQueryEngine _customerPricingQueryEngineMock;
         private ViewResult _result;
 
         [SetUp]
@@ -25,9 +25,9 @@ namespace ArmPricing.Tests
         {
             _pricingQueryServiceMock = MockRepository.GenerateMock<IPricingQueryService>();
             _emailingServiceMock = MockRepository.GenerateMock<IEmailingService>();
-            _customerPricingQueryMapperMock = MockRepository.GenerateMock<IMapCustomerPricingModels>();
+            _customerPricingQueryEngineMock = MockRepository.GenerateMock<ICustomerPricingQueryEngine>();
 
-            _controllerUnderTest = new PricingQueryController(_pricingQueryServiceMock, _emailingServiceMock, _customerPricingQueryMapperMock);
+            _controllerUnderTest = new PricingQueryController(_pricingQueryServiceMock, _emailingServiceMock, _customerPricingQueryEngineMock);
 
             var customerPricingModel = SetUpCustomerPricingQueryModel();
 
@@ -71,37 +71,43 @@ namespace ArmPricing.Tests
         }
 
         [Test]
-        public void Should_MakeACallToTheCustomerPricingQueryModelMapper_When_AttemptingToRegisterAPricingQuery()
+        public void Should_MakeACallToTheCustomerPricingQueryEngine_When_AttemptingToRegisterAPricingQuery()
         {
-            _customerPricingQueryMapperMock.AssertWasCalled(x => x.Map(Arg<CustomerPricingQueryModel>.Is.Anything));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Is.Anything));
         }
 
         [Test]
-        public void Should_MapACustomerPricingQueryModelWithCustomerLastName_When_AttemptingToRegisterAPricingQuery()
+        public void Should_MakeACallToTheCustomerPricingQueryEngineWithCustomerLastName_When_AttemptingToRegisterAPricingQuery()
         {
-            _customerPricingQueryMapperMock.AssertWasCalled(x => x.Map(Arg<CustomerPricingQueryModel>.Matches(m => m.LastName == "Jones")));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m => m.LastName == "Jones")));
         }
 
         [Test]
-        public void Should_MapACustomerPricingQueryModelWithCustomerEmail_When_AttemptingToRegisterAPricingQuery()
+        public void Should_MakeACallToTheCustomerPricingQueryEngineWithCustomerEmail_When_AttemptingToRegisterAPricingQuery()
         {
-            _customerPricingQueryMapperMock.AssertWasCalled(x => x.Map(Arg<CustomerPricingQueryModel>.Matches(m => m.Email == "Jones@Bob.com")));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m => m.Email == "Jones@Bob.com")));
         }
 
         [Test]
-        public void Should_MapRemainingMandatoryFieldsFromTheCustomerPricingQueryModel_When_AttemptingToRegisterAPricingQuery()
+        public void Should_MakeACallToTheTheCustomerPricingQueryEngineWithTheRemainingMandatoryFields_When_AttemptingToRegisterAPricingQuery()
         {
-            _customerPricingQueryMapperMock.AssertWasCalled(x => x.Map(Arg<CustomerPricingQueryModel>.Matches(m => m.AddressLine1 == "Address1")));
-            _customerPricingQueryMapperMock.AssertWasCalled(x => x.Map(Arg<CustomerPricingQueryModel>.Matches(m => m.City == "City")));
-            _customerPricingQueryMapperMock.AssertWasCalled(x => x.Map(Arg<CustomerPricingQueryModel>.Matches(m => m.PostCode == "PostCode")));
-            _customerPricingQueryMapperMock.AssertWasCalled(x => x.Map(Arg<CustomerPricingQueryModel>.Matches(m => m.Country == "Country")));
-            _customerPricingQueryMapperMock.AssertWasCalled(x => x.Map(Arg<CustomerPricingQueryModel>.Matches(m => m.Phone == "01234567890")));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m => m.AddressLine1 == "Address1")));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m => m.City == "City")));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m => m.PostCode == "PostCode")));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m => m.Country == "Country")));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m => m.Phone == "01234567890")));
         }
 
         [Test]
         public void Should_MapCustomerPricingQueryModelWithProducts_When_AttemptingToRegisterAPricingQuery()
         {
-            _customerPricingQueryMapperMock.AssertWasCalled(x => x.Map(Arg<CustomerPricingQueryModel>.Matches(m=>m.Products.Any())));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m=>m.Products.Any())));
+        }
+
+        [Test]
+        public void Should_ReturnAPricingQueryFromTheCustomerPricingQueryEngine_When_AttemptingToRegisterAPricingQuery()
+        {
+            throw new NotImplementedException("Test in place but commiting progress first.");
         }
     }
 }

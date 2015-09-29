@@ -9,9 +9,9 @@ namespace Pricing.Controllers
     {
         private readonly IPricingQueryService _pricingQueryService;
         private readonly IEmailingService _emailingServiceMock;
-        private readonly IMapCustomerPricingModels _customerMapper;
+        private readonly ICustomerPricingQueryEngine _customerMapper;
 
-        public PricingQueryController(IPricingQueryService pricingQueryService, IEmailingService emailingServiceMock, IMapCustomerPricingModels customerMapper)
+        public PricingQueryController(IPricingQueryService pricingQueryService, IEmailingService emailingServiceMock, ICustomerPricingQueryEngine customerMapper)
         {
             _pricingQueryService = pricingQueryService;
             _emailingServiceMock = emailingServiceMock;
@@ -22,7 +22,7 @@ namespace Pricing.Controllers
         [HttpPost]
         public ActionResult Register(CustomerPricingQueryModel customerPricingQueryModel)
         {
-            _customerMapper.Map(customerPricingQueryModel);
+            _customerMapper.GenerateQuery(customerPricingQueryModel);
             _pricingQueryService.RegisterPricingQuery();
             _emailingServiceMock.SendEmailToTheSalesTeam();
             return View("ThankYou");
