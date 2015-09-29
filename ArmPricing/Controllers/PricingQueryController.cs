@@ -22,7 +22,7 @@ namespace Pricing.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(new CustomerPricingQueryInputModel());
         }
 
         [HttpPost]
