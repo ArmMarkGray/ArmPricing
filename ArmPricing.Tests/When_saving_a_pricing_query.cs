@@ -64,5 +64,11 @@ namespace ArmPricing.Tests
         {
             _customerMapperMock.AssertWasCalled(x=>x.Map(Arg<CustomerPricingModel>.Matches(m=>m.LastName == "Jones")));
         }
+
+        [Test]
+        public void Should_MapACustomerPricingQueryModelWithCustomerEmail_When_AttemptingToRegisterAPricingQuery()
+        {
+            _customerMapperMock.AssertWasCalled(x=>x.Map(Arg<CustomerPricingModel>.Matches(m=>m.Email == "Jones@Bob.com")));
+        }
     }
 }
