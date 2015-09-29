@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using NUnit.Framework;
@@ -28,7 +29,17 @@ namespace ArmPricing.Tests
 
             _controllerUnderTest = new PricingQueryController(_pricingQueryServiceMock, _emailingServiceMock, _customerPricingQueryMapperMock);
 
-            var customerPricingModel = new CustomerPricingQueryModel
+            var customerPricingModel = SetUpCustomerPricingQueryModel();
+
+            _result = _controllerUnderTest.Register(customerPricingModel) as ViewResult;
+        }
+
+        private static CustomerPricingQueryModel SetUpCustomerPricingQueryModel()
+        {
+            var products = new List<ProductModel> {new ProductModel()};
+
+
+            return new CustomerPricingQueryModel
             {
                 LastName = "Jones",
                 Email = "Jones@Bob.com",
@@ -36,10 +47,9 @@ namespace ArmPricing.Tests
                 City = "City",
                 PostCode = "PostCode",
                 Country = "Country",
-                Phone = "01234567890"
+                Phone = "01234567890",
+                Products = products
             };
-
-            _result = _controllerUnderTest.Register(customerPricingModel) as ViewResult;
         }
 
         [Test]
