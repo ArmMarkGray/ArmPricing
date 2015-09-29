@@ -20,7 +20,7 @@ namespace Pricing.Controllers
         {
             _pricingQueryService.RegisterPricingQuery();
             _emailingServiceMock.SendEmailToTheSalesTeam();
-            return View();
+            return View("ThankYou");
         }
     }
 }
