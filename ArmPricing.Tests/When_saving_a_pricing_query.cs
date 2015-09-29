@@ -9,30 +9,30 @@ namespace ArmPricing.Tests
     [TestFixture]
     public class When_saving_a_pricing_query
     {
-        private PricingQueryController controllerUnderTest;
-        private IPricingQueryService pricingQueryServiceMock;
-        private IEmailingService emailingServiceMock;
+        private PricingQueryController _controllerUnderTest;
+        private IPricingQueryService _pricingQueryServiceMock;
+        private IEmailingService _emailingServiceMock;
 
         [SetUp]
         public void SetUpTests()
         {
-            pricingQueryServiceMock = MockRepository.GenerateMock<IPricingQueryService>();
-            emailingServiceMock = MockRepository.GenerateMock<IEmailingService>();
-            controllerUnderTest = new PricingQueryController(pricingQueryServiceMock);
+            _pricingQueryServiceMock = MockRepository.GenerateMock<IPricingQueryService>();
+            _emailingServiceMock = MockRepository.GenerateMock<IEmailingService>();
+            _controllerUnderTest = new PricingQueryController(_pricingQueryServiceMock, _emailingServiceMock);
         }
 
         [Test]
         public void Should_MakeACallToThePricingQueryService_When_AttemptingToRegisterAPricingQuery()
         {
-            controllerUnderTest.Register();
-            pricingQueryServiceMock.AssertWasCalled(x => x.RegisterPricingQuery());
+            _controllerUnderTest.Register();
+            _pricingQueryServiceMock.AssertWasCalled(x => x.RegisterPricingQuery());
         }
 
         [Test]
         public void Should_MakeACallToTheEmailService_When_RegisteringAPricingQuery()
         {
-            controllerUnderTest.Register();
-            emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam());
+            _controllerUnderTest.Register();
+            _emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam());
         }
 
     }
