@@ -19,6 +19,11 @@ namespace Pricing.Controllers
             _customerMapper = customerMapper;
         }
 
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Register(CustomerPricingQueryModel customerPricingQueryModel)
