@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using NUnit.Framework;
 using Pricing.Controllers;
@@ -28,6 +29,15 @@ namespace ArmPricing.Tests
             _emailingServiceMock = MockRepository.GenerateMock<IEmailingService>();
             _customerPricingQueryEngineMock = MockRepository.GenerateMock<ICustomerPricingQueryEngine>();
 
+
+            _customerPricingQueryEngineMock
+                .Expect(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Is.Anything))
+                .Return(new PricingQuery
+                {
+                    Products = new List<Product>(),
+                    Value = () => 100.0m
+                });
+
             _controllerUnderTest = new PricingQueryController(_pricingQueryRepositoryMock, _emailingServiceMock, _customerPricingQueryEngineMock);
 
             var customerPricingModel = SetUpCustomerPricingQueryModel();
@@ -37,7 +47,7 @@ namespace ArmPricing.Tests
 
         private static CustomerPricingQueryModel SetUpCustomerPricingQueryModel()
         {
-            var products = new List<ProductModel> {new ProductModel()};
+            var products = new List<ProductModel> { new ProductModel() };
 
 
             return new CustomerPricingQueryModel
@@ -102,13 +112,19 @@ namespace ArmPricing.Tests
         [Test]
         public void Should_MapCustomerPricingQueryModelWithProducts_When_AttemptingToRegisterAPricingQuery()
         {
-            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m=>m.Products.Any())));
+            _customerPricingQueryEngineMock.AssertWasCalled(x => x.GenerateQuery(Arg<CustomerPricingQueryModel>.Matches(m => m.Products.Any())));
         }
 
         [Test]
         public void Should_CallThePricingQueryRepositoryWithAPricingQuery_When_AttemptingToRegisterAPricingQuery()
         {
-            _pricingQueryRepositoryMock.AssertWasCalled(x=>x.RegisterPricingQuery(Arg<PricingQuery>.Is.Anything));
+            _pricingQueryRepositoryMock.AssertWasCalled(x => x.RegisterPricingQuery(Arg<PricingQuery>.Is.Anything));
+        }
+
+        [Test]
+        public void Should_CallThePricingQueryRepositoryWithAPricingQueryWithTheValueSet_When_AttemptingToRegisterAPricingQuery()
+        {
+            _pricingQueryRepositoryMock.AssertWasCalled(x => x.RegisterPricingQuery(Arg<PricingQuery>.Matches(p=>p.Value() == 100.0m)));
         }
     }
 }
