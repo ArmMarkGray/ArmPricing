@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Pricing.Mappers;
 using Pricing.Models;
+using Pricing.Repositories;
 using Pricing.Services;
 
 namespace Pricing.Controllers

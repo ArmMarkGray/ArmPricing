@@ -1,6 +1,6 @@
 using Pricing.Domain;
 
-namespace Pricing.Services
+namespace Pricing.Repositories
 {
     public class PricingQueryRepository : IPricingQueryRepository
     {

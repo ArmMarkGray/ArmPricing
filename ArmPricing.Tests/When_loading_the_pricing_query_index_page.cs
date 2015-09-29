@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Pricing.Controllers;
 using Pricing.Mappers;
 using Pricing.Models;
+using Pricing.Repositories;
 using Pricing.Services;
 using Rhino.Mocks;
 

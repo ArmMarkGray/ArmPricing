@@ -114,16 +114,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\CustomerPricingQueryEngine.cs" />
-    <Compile Include="Mappers\ICustomerPricingQueryEngine.cs" />
+    <Compile Include="Engine\CustomerPricingQueryEngine.cs" />
+    <Compile Include="Engine\ICustomerPricingQueryEngine.cs" />
     <Compile Include="Models\CustomerPricingQueryInputModel.cs" />
     <Compile Include="Models\CustomerPricingQueryModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EmailingService.cs" />
     <Compile Include="Services\IEmailingService.cs" />
-    <Compile Include="Services\IPricingQueryRepository.cs" />
-    <Compile Include="Services\PricingQueryRepository.cs" />
+    <Compile Include="Repositories\IPricingQueryRepository.cs" />
+    <Compile Include="Repositories\PricingQueryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

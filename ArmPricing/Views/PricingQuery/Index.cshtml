@@ -81,7 +81,6 @@
             </div>
             <div class="editor-field">
                 @Html.ListBoxFor(model => model.Products, new SelectList(Model.Products, "Name", "Name"))
-                @Html.EditorFor(model => model.Products)
                 @Html.ValidationMessageFor(model => model.Products)
             </div>
     
