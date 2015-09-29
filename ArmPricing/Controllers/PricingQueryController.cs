@@ -14,6 +14,7 @@ namespace Pricing.Controllers
 
         public ActionResult Register()
         {
+            _pricingQueryService.RegisterPricingQuery();
             return View();
         }
     }
