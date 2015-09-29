@@ -1,16 +1,20 @@
 ﻿using System.Web.Mvc;
+using Pricing.Services;
 
 namespace Pricing.Controllers
 {
     public class PricingQueryController : Controller
     {
-        //
-        // GET: /PricingQuery/
+        private readonly IPricingQueryService _pricingQueryService;
 
-        public ActionResult Index()
+        public PricingQueryController(IPricingQueryService pricingQueryService)
+        {
+            _pricingQueryService = pricingQueryService;
+        }
+
+        public ActionResult Register()
         {
             return View();
         }
-
     }
 }

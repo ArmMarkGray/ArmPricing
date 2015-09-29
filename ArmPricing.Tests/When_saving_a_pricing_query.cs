@@ -1,6 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
 using Pricing.Controllers;
+using Pricing.Services;
+using Rhino.Mocks;
 
 namespace ArmPricing.Tests
 {
@@ -8,17 +10,20 @@ namespace ArmPricing.Tests
     public class When_saving_a_pricing_query
     {
         private PricingQueryController controllerUnderTest;
+        private IPricingQueryService pricingQueryServiceMock;
 
         [SetUp]
         public void SetUpTests()
         {
-            controllerUnderTest = new PricingQueryController();
+            pricingQueryServiceMock = MockRepository.GenerateMock<IPricingQueryService>();
+            controllerUnderTest = new PricingQueryController(pricingQueryServiceMock);
         }
 
         [Test]
         public void Should_MakeACallToThePricingQueryService_When_AttemptingToRegisterAPricingQuery()
         {
-            throw new NotImplementedException();
+            controllerUnderTest.Register();
+            pricingQueryServiceMock.AssertWasCalled(x => x.RegisterPricingQuery());
         }
 
     }
