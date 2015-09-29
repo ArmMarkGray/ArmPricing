@@ -1,6 +1,7 @@
 # ArmPricing
 
-**Assumptions
+**Assumptions**
+
 ASP.net MVC most likely with Razor as it is the most common tempting framework for asp.net
 Asking for optional and mandatory fields so you expect validation, possibly implies a JS framework?
 Entities would include:
