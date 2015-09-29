@@ -22,7 +22,7 @@ namespace Pricing.Controllers
         [HttpPost]
         public ActionResult Register(CustomerPricingModel customerPricingModel)
         {
-
+            _customerMapper.Map(customerPricingModel);
             _pricingQueryService.RegisterPricingQuery();
             _emailingServiceMock.SendEmailToTheSalesTeam();
             return View("ThankYou");

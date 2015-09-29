@@ -51,9 +51,15 @@ namespace ArmPricing.Tests
         }
 
         [Test]
-        public void Should_MapACustomerPricingQueryModelWithCustomerLastName_When_AttemptingToRegisterAPricingQuery()
+        public void Should_MakeACallToTheCustomerPricingQueryModelMapper_When_AttemptingToRegisterAPricingQuery()
         {
             _customerMapperMock.AssertWasCalled(x=>x.Map(Arg<CustomerPricingModel>.Is.Anything));
+        }
+
+        [Test]
+        public void Should_MapACustomerPricingQueryModelWithCustomerLastName_When_AttemptingToRegisterAPricingQuery()
+        {
+            _customerMapperMock.AssertWasCalled(x=>x.Map(Arg<CustomerPricingModel>.Matches(m=>m.LastName == "Jones")));
         }
     }
 }
