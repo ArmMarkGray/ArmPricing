@@ -1,9 +1,10 @@
-﻿using Pricing.Models;
+﻿using Pricing.Domain;
+using Pricing.Models;
 
 namespace Pricing.Mappers
 {
     public interface ICustomerPricingQueryEngine
     {
-        void GenerateQuery(CustomerPricingQueryModel customerPricingQueryModel);
+        PricingQuery GenerateQuery(CustomerPricingQueryModel customerPricingQueryModel);
     }
 }

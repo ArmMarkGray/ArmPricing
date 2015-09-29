@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Pricing.Domain;
 using Pricing.Mappers;
 using Pricing.Models;
 using Pricing.Services;
@@ -23,7 +24,7 @@ namespace Pricing.Controllers
         public ActionResult Register(CustomerPricingQueryModel customerPricingQueryModel)
         {
             _customerMapper.GenerateQuery(customerPricingQueryModel);
-            _pricingQueryService.RegisterPricingQuery();
+            _pricingQueryService.RegisterPricingQuery(new PricingQuery());
             _emailingServiceMock.SendEmailToTheSalesTeam();
             return View("ThankYou");
         }

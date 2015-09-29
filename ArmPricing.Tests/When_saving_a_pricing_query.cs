@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using NUnit.Framework;
 using Pricing.Controllers;
+using Pricing.Domain;
 using Pricing.Mappers;
 using Pricing.Models;
 using Pricing.Services;
@@ -55,7 +56,7 @@ namespace ArmPricing.Tests
         [Test]
         public void Should_MakeACallToThePricingQueryService_When_AttemptingToRegisterAPricingQuery()
         {
-            _pricingQueryServiceMock.AssertWasCalled(x => x.RegisterPricingQuery());
+            _pricingQueryServiceMock.AssertWasCalled(x => x.RegisterPricingQuery(Arg<PricingQuery>.Is.Anything));
         }
 
         [Test]
@@ -105,9 +106,9 @@ namespace ArmPricing.Tests
         }
 
         [Test]
-        public void Should_ReturnAPricingQueryFromTheCustomerPricingQueryEngine_When_AttemptingToRegisterAPricingQuery()
+        public void Should_CallThePricingQueryServiceWithAPricingQuery_When_AttemptingToRegisterAPricingQuery()
         {
-            throw new NotImplementedException("Test in place but commiting progress first.");
+            _pricingQueryServiceMock.AssertWasCalled(x=>x.RegisterPricingQuery(Arg<PricingQuery>.Is.Anything));
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace Pricing.Services
+﻿using Pricing.Domain;
+
+namespace Pricing.Services
 {
     public interface IPricingQueryService
     {
-        void RegisterPricingQuery();
+        void RegisterPricingQuery(PricingQuery pricingQuery);
     }
 }
