@@ -20,9 +20,9 @@ namespace Pricing.Controllers
 
 
         [HttpPost]
-        public ActionResult Register(CustomerPricingModel customerPricingModel)
+        public ActionResult Register(CustomerPricingQueryModel customerPricingQueryModel)
         {
-            _customerMapper.Map(customerPricingModel);
+            _customerMapper.Map(customerPricingQueryModel);
             _pricingQueryService.RegisterPricingQuery();
             _emailingServiceMock.SendEmailToTheSalesTeam();
             return View("ThankYou");

@@ -4,6 +4,6 @@ namespace Pricing.Mappers
 {
     public interface IMapCustomerPricingModels
     {
-        void Map(CustomerPricingModel customerPricingModel);
+        void Map(CustomerPricingQueryModel customerPricingQueryModel);
     }
 }
