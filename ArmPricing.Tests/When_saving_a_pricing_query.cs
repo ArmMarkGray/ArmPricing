@@ -16,6 +16,7 @@ namespace ArmPricing.Tests
         private IPricingQueryService _pricingQueryServiceMock;
         private IEmailingService _emailingServiceMock;
         private IMapCustomerPricingModels _customerMapper;
+        private ViewResult _result;
 
         [SetUp]
         public void SetUpTests()
@@ -23,35 +24,30 @@ namespace ArmPricing.Tests
             _pricingQueryServiceMock = MockRepository.GenerateMock<IPricingQueryService>();
             _emailingServiceMock = MockRepository.GenerateMock<IEmailingService>();
             _controllerUnderTest = new PricingQueryController(_pricingQueryServiceMock, _emailingServiceMock);
+            _result = _controllerUnderTest.Register() as ViewResult;
         }
 
         [Test]
         public void Should_MakeACallToThePricingQueryService_When_AttemptingToRegisterAPricingQuery()
         {
-            _controllerUnderTest.Register();
             _pricingQueryServiceMock.AssertWasCalled(x => x.RegisterPricingQuery());
         }
 
         [Test]
         public void Should_MakeACallToTheEmailService_When_RegisteringAPricingQuery()
         {
-            _controllerUnderTest.Register();
             _emailingServiceMock.AssertWasCalled(x => x.SendEmailToTheSalesTeam());
         }
 
         [Test]
         public void Should_SendTheCustomerToTheThankYouPage_When_ThePricingQueryHasBeenRegistered()
         {
-            var result = _controllerUnderTest.Register() as ViewResult;
-
-            Assert.That(result.ViewName, Is.EqualTo("ThankYou"));
+            Assert.That(_result.ViewName, Is.EqualTo("ThankYou"));
         }
 
         [Test]
         public void Should_MapACustomerPricingQueryModelWithCustomerLastName_When_AttemptingToRegisterAPricingQuery()
         {
-            _controllerUnderTest.Register();
-
             _customerMapper.AssertWasCalled(x=>x.Map(Arg<CustomerPricingModel>.Is.Anything));
         }
     }
