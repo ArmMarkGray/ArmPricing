@@ -29,7 +29,8 @@ namespace ArmPricing.Tests
 
             var customerPricingModel = new CustomerPricingModel
             {
-                LastName = "Jones"
+                LastName = "Jones",
+                Email = "Jones@Bob.com"
             };
             
             _result = _controllerUnderTest.Register(customerPricingModel) as ViewResult;
